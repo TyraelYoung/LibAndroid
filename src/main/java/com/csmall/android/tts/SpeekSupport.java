@@ -1,0 +1,56 @@
+package com.csmall.android.tts;
+
+import android.content.Context;
+import android.os.Build;
+import android.speech.tts.TextToSpeech;
+
+import com.csmall.android.ToastUtil;
+import com.csmall.android.application.ApplicationHolder;
+import com.csmall.log.LogHelper;
+
+import java.util.Locale;
+import java.util.UUID;
+
+/**
+ * Created by 王超 on 2017/11/2.
+ */
+
+public class SpeekSupport {
+    private static final String TAG = "SpeekSupport";
+    private static final Context context = ApplicationHolder.getApplication();
+
+    private static SpeekSupport speekSupport = new SpeekSupport();
+
+    public static SpeekSupport getSpeekSupport() {
+        return speekSupport;
+    }
+
+    private TextToSpeech textToSpeech = new TextToSpeech(context, new TextToSpeech.OnInitListener() {
+        @Override
+        public void onInit(int status) {
+            switch (status){
+                case TextToSpeech.SUCCESS:
+                    int result = textToSpeech.setLanguage(Locale.CHINA);
+                    if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED)
+                    {
+                        ToastUtil.show("您的手机系统文字转语音引擎不支持中文，请各大应用市场下载 Google文字转语音");
+                    }
+                    LogHelper.i(TAG, "onInit SUCCESS");
+                    break;
+                case TextToSpeech.ERROR:
+                    LogHelper.i(TAG, "onInit ERROR");
+                    break;
+            }
+        }
+    });
+
+    public void speek(String s){
+        LogHelper.i(TAG, "speek:" + s);
+        UUID uuid = UUID.randomUUID();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            textToSpeech.speak(s, TextToSpeech.QUEUE_ADD, null, uuid.toString());
+        }else{
+            textToSpeech.speak(s, TextToSpeech.QUEUE_ADD, null);
+        }
+    }
+}
