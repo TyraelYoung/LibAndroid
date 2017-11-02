@@ -1,4 +1,4 @@
-package com.csmall.android;
+package com.csmall.android.activity;
 
 import android.app.Activity;
 
