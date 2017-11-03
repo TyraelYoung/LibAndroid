@@ -202,7 +202,7 @@ public class FileUtil {
 
     /**
      * 获取文件指定文件的指定单位的大小
-     * @param filePath 文件路径
+     * @param file 文件路径
      * @return
      */
     public static long getFileOrDirSize(File file) {
