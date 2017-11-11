@@ -2,14 +2,16 @@ package com.csmall;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import com.csmall.android.DebugHelper;
 import com.csmall.android.application.ApplicationHolder;
 import com.csmall.crash.BuglyApi;
 import com.csmall.log.LogHelper;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.csmall.net.okhttp.ClientFactory;
+import com.facebook.stetho.Stetho;
+
+import wang.tyrael.library.http.okhttp.async.HttpWithCookieStatic;
 
 /**
  * Created by wangchao on 2017/3/29.
@@ -17,30 +19,19 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 public class LibInitManager {
 
+    private static final String TAG = "LibInitManager";
+
     public static void initOnAppCreate(LibInitData data) {
+        Log.i(TAG, "initOnAppCreate");
+        Context  context= ApplicationHolder.getApplication();
         LogHelper.init();
 //        ApplicationHolder.setApplication(data.app);
         BuglyApi.initOnAppCreate();
         //MailSender.setMailConfig(data.mailConfig);
-        initImageLoader(ApplicationHolder.getApplication());
+        Stetho.initializeWithDefaults(context);
+
+        HttpWithCookieStatic.init(ClientFactory.getClientWithCookie());
     }
 
 
-    public static void initImageLoader(Context context) {
-        DisplayImageOptions options = new DisplayImageOptions.Builder()
-                .cacheInMemory(true)
-                .cacheOnDisk(true)
-                .considerExifParams(true)
-                .bitmapConfig(Bitmap.Config.RGB_565)
-                .build();
-        ImageLoaderConfiguration.Builder builder = new ImageLoaderConfiguration.Builder(
-                context)
-                .defaultDisplayImageOptions(options);
-        if(DebugHelper.isDebuggable()){
-            builder.writeDebugLogs();
-        }
-        // Initialize ImageLoader with configuration.
-        ImageLoader.getInstance().init(builder.build());
-
-    }
 }
