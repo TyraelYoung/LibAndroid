@@ -21,7 +21,6 @@ public class ActivityManager {
     private static volatile Activity fore;
     private static List<AsyncListener> mResumeListeners = new ArrayList<AsyncListener>();
 
-
     //TODO 考虑多线程问题。
     public static void onResumeEnd(Activity activity){
         Activity before = fore;

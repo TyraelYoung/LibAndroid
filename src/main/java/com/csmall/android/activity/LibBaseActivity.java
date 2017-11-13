@@ -6,7 +6,14 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.csmall.log.LogHelper;
+import com.csmall.presenter.Event;
 import com.csmall.presenter.UIInterface;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
+import wang.tyrael.eventbus.event.Status401Event;
+import wang.tyrael.eventbus.event.Status403Event;
 
 /**
  * Created by 王超 on 2017/11/2.
@@ -20,6 +27,7 @@ public abstract class LibBaseActivity extends AppCompatActivity implements UIInt
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         LogHelper.i(TAG, "onCreate:" + this);
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -49,6 +57,9 @@ public abstract class LibBaseActivity extends AppCompatActivity implements UIInt
     @Override
     protected void onDestroy() {
         LogHelper.i(TAG, "onDestroy:" + this);
+
         super.onDestroy();
     }
+
+
 }
