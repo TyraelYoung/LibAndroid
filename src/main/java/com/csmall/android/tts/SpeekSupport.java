@@ -25,12 +25,14 @@ public class SpeekSupport {
         return speekSupport;
     }
 
-    private TextToSpeech textToSpeech = new TextToSpeech(context, new TextToSpeech.OnInitListener() {
+    public TextToSpeech textToSpeech = new TextToSpeech(context, new TextToSpeech.OnInitListener() {
         @Override
         public void onInit(int status) {
             switch (status){
                 case TextToSpeech.SUCCESS:
                     int result = textToSpeech.setLanguage(Locale.CHINA);
+                    //华为MHA-AL00会设置失败fail bound to com.google.android.tts
+                    //TextToSpeech: Failed to bind to com.google.android.tts
                     if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED)
                     {
                         ToastUtil.show("您的手机系统文字转语音引擎不支持中文，请各大应用市场下载 Google文字转语音");
@@ -42,7 +44,7 @@ public class SpeekSupport {
                     break;
             }
         }
-    });
+    }, "com.google.android.tts");
 
     public void speek(String s){
         LogHelper.i(TAG, "speek:" + s);
