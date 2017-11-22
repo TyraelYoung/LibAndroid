@@ -53,4 +53,4 @@
 #picasso
 -dontwarn com.squareup.okhttp.**
 
--keep class com.csmall.android.menu.**{*;}
+-keep class wang.tyrael.android.menu.**{*;}

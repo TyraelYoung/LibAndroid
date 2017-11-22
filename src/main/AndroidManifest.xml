@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.csmall.library">
+    package="wang.tyrael.library">
 
     <!--未知-->
     <!--bugly-->
