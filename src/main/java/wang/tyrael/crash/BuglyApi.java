@@ -1,7 +1,10 @@
 package wang.tyrael.crash;
 
 import wang.tyrael.android.application.ApplicationHolder;
+import wang.tyrael.android.manifest.ManifestHelper;
 import wang.tyrael.log.LogHelper;
+
+import com.tencent.bugly.Bugly;
 import com.tencent.bugly.crashreport.CrashReport;
 
 /**
@@ -14,8 +17,9 @@ public class BuglyApi {
     public static void initOnAppCreate(){
         LogHelper.i(TAG, "initOnAppCreate");
         //默认去manifest中取值
-//        Bugly.init(ApplicationHolder.getApplication(), "bc4cb057ab", false);
+        String name = ManifestHelper.getMetaData("BUGLY_APPID");
+        Bugly.init(ApplicationHolder.getApplication(), name, false);
 //        Bugly.init(ApplicationHolder.getApplication());
-        CrashReport.initCrashReport(ApplicationHolder.getApplication());
+//        CrashReport.initCrashReport(ApplicationHolder.getApplication());
     }
 }

@@ -1,9 +1,12 @@
-package wang.tyrael.android;
+package wang.tyrael.android.media;
 
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.widget.VideoView;
+
+import java.io.IOException;
 
 import wang.tyrael.android.application.ApplicationHolder;
 import wang.tyrael.report.ReportManager;
@@ -14,7 +17,7 @@ import wang.tyrael.report.ReportManager;
  *TODO 做一个状态记录功能
  * Created by wangchao on 2015/12/15.
  */
-public class MediaPlayerHelper {
+public class MediaPlayerSupport {
     public static final int STATE_COMPLETED = 1;
     public static final int STATE_PREPARED = 2;
     public static final int STATE_IDLE = 3;
@@ -23,7 +26,9 @@ public class MediaPlayerHelper {
 
 
     private static final AudioManager sfAudioManager = (AudioManager) ApplicationHolder.getApplication().getSystemService(Context.AUDIO_SERVICE);
-    private static final String TAG = "MediaPlayerHelper";
+    private static final String TAG = "MediaPlayerSupport";
+    private static final Context context = ApplicationHolder.getApplication();
+    private static final String packageName = context.getPackageName();
 
     private MediaPlayer mPlayer;
     private VideoView mVideoView;
@@ -39,7 +44,7 @@ public class MediaPlayerHelper {
      */
     private volatile int state = STATE_IDLE;
 
-    public MediaPlayerHelper(VideoView vv){
+    public MediaPlayerSupport(VideoView vv){
         mVideoView = vv;
         mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
@@ -85,9 +90,68 @@ public class MediaPlayerHelper {
         });
     }
 
-//    public MediaPlayerHelper(MediaPlayer mPlayer) {
-//        this.mPlayer = mPlayer;
-//    }
+    public MediaPlayerSupport(MediaPlayer player) {
+        this.mPlayer = player;
+        mPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mediaPlayer) {
+                state = STATE_PREPARED;
+                mPlayer = mediaPlayer;
+                //如果在第一次播放前，外部设置了静音，则静音没有生效，要在这里检查一下
+                if(mMute){
+                    mPlayer.setVolume(0, 0);
+                }
+                if(mPreparedListener != null){
+                    mPreparedListener.onPrepared(mediaPlayer);
+                }
+            }
+        });
+        mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                state = STATE_COMPLETED;
+                if (mCompetionListener != null) {
+                    mCompetionListener.onCompletion(mediaPlayer);
+                }
+            }
+        });
+        mPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+            @Override
+            public boolean onError(MediaPlayer mediaPlayer, int i, int i1) {
+                state = STATE_ERROR;
+                if(mErrorListener != null){
+                    mErrorListener.onError(mediaPlayer, i, i1);
+                }
+                //重置一下
+                //http://bugly.qq.com/detail?app=900008912&pid=1&ii=556#stack
+                try{
+                    mediaPlayer.reset();
+                    state = STATE_IDLE;
+                }catch (IllegalStateException ise){
+                    ReportManager.getInstance().reportException(null, ise);
+                }
+                ReportManager.getInstance().reportFail(TAG, "播放失败。 maincode:" + i + " extra:" + i1);
+                return true;
+            }
+        });
+    }
+
+    public MediaPlayerSupport() {
+        this(new MediaPlayer());
+    }
+
+    public void prepareRaw(int rawid) {
+        //优化 根据状态决定是否要reset
+        mPlayer.reset();
+        Uri uri = Uri.parse("android.resource://" + packageName + "/" + rawid);
+        try {
+            mPlayer.setDataSource(context, uri);
+            mPlayer.prepare();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public MediaPlayer getPlayer(){
         return mPlayer;
@@ -96,6 +160,7 @@ public class MediaPlayerHelper {
     public VideoView getVideoView(){
         return mVideoView;
     }
+
 
     public void mute(boolean mute){
         //需要检查player的状态
