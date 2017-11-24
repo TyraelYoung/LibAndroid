@@ -5,7 +5,7 @@ android {
     buildToolsVersion '26.0.2'
 
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 18
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -27,11 +27,17 @@ android {
 dependencies {
 
 
-    api 'com.android.support:appcompat-v7:25.4.0'
-    api 'com.android.support:support-v4:25.4.0'
-    api 'com.android.support:support-vector-drawable:25.4.0'
+    api 'com.android.support:appcompat-v7:26.1.0'
+    api 'com.android.support:support-v4:26.1.0'
+    api 'com.android.support:support-vector-drawable:26.1.0'
     api 'com.android.support.constraint:constraint-layout:1.0.2'
-    api 'com.android.support:design:25.4.0'
+    api 'com.android.support:design:26.1.0'
+
+
+//    compile 'com.madgag.spongycastle:core:latest.release'
+//    compile 'com.madgag.spongycastle:prov:latest.release'
+//    compile 'com.madgag.spongycastle:pkix:latest.release'
+//    compile 'com.madgag.spongycastle:pg:latest.release'
 
     testCompile 'junit:junit:4.12'
 
