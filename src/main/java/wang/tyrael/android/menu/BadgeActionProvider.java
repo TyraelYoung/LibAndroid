@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import wang.tyrael.R;
+import wang.tyrael.library.R;
 
 /**
  * Created by 王超 on 2017/10/18.
