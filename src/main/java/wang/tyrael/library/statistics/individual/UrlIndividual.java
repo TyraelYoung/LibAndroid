@@ -1,4 +1,4 @@
-package wang.tyrael.library.statistics.individual;
+package wang.tyrael.statistics.individual;
 
 /**
  * Created by wangchao on 2016/6/12.

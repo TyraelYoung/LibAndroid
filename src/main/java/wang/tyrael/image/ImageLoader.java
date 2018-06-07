@@ -8,7 +8,7 @@ import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
 import okhttp3.OkHttpClient;
-import wang.tyrael.library.http.okhttpapi.ClientApi;
+import wang.tyrael.http.okhttpapi.ClientApi;
 
 /**
  * 图像加载适配器，底层可以换用各种库，不影响业务变化
@@ -28,6 +28,6 @@ public class ImageLoader {
     }
 
     public static void display(ImageView imageView, String url) {
-        Picasso.with(context).load(url).into(imageView);
+//        Picasso.with(context).load(url).into(imageView);
     }
 }

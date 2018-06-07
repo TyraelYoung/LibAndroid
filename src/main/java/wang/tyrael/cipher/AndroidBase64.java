@@ -2,7 +2,7 @@ package wang.tyrael.cipher;
 
 import android.util.Base64;
 
-import wang.tyrael.library.cipher.IBase64;
+import wang.tyrael.cipher.IBase64;
 
 /**
  *  * 安卓8.0后支持java8 Base64类

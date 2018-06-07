@@ -5,7 +5,7 @@ import com.facebook.stetho.okhttp3.StethoInterceptor;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
-import wang.tyrael.library.http.okhttpapi.CookieJarSupport;
+import wang.tyrael.http.okhttpapi.CookieJarSupport;
 
 /**
  * Created by 王超 on 2017/11/11.

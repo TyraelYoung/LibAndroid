@@ -12,8 +12,8 @@ import java.security.spec.AlgorithmParameterSpec;
 
 import javax.crypto.SecretKey;
 
-import wang.tyrael.library.cipher.CipherSupport;
-import wang.tyrael.library.cipher.EncryptData;
+import wang.tyrael.cipher.CipherSupport;
+import wang.tyrael.cipher.EncryptData;
 import wang.tyrael.log.LogHelper;
 
 /**

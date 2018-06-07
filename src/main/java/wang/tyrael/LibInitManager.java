@@ -9,7 +9,7 @@ import wang.tyrael.log.LogHelper;
 import wang.tyrael.net.okhttp.ClientFactory;
 import com.facebook.stetho.Stetho;
 
-import wang.tyrael.library.http.okhttp.async.HttpWithCookieStatic;
+import wang.tyrael.http.okhttp.async.HttpWithCookieStatic;
 
 /**
  * Created by wangchao on 2017/3/29.

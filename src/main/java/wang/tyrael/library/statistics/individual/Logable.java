@@ -1,4 +1,4 @@
-package wang.tyrael.library.statistics.individual;
+package wang.tyrael.statistics.individual;
 
 /**
  * 标记性接口，

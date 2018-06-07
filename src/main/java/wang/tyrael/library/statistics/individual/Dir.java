@@ -1,4 +1,4 @@
-package wang.tyrael.library.statistics.individual;
+package wang.tyrael.statistics.individual;
 
 import android.os.Environment;
 import android.util.Log;

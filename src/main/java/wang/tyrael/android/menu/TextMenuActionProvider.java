@@ -9,7 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import wang.tyrael.library.R;
+import wang.tyrael.R;
 import wang.tyrael.log.LogHelper;
 
 /**

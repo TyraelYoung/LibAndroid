@@ -2,7 +2,7 @@ package wang.tyrael.net;
 
 import java.net.MalformedURLException;
 
-import wang.tyrael.library.http.UrlParser;
+import wang.tyrael.http.UrlParser;
 
 /**
  * Created by csmallTech on 2017/3/6.
@@ -15,12 +15,7 @@ public class UrlUtil {
      * @return
      */
     public static String encode(String url){
-        UrlParser parser = null;
-        try {
-            parser = new UrlParser(url);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+        UrlParser parser = parser = new UrlParser(url);
         parser.parse();
         return parser.encode();
     }

@@ -1,6 +1,6 @@
 package wang.tyrael.json.individual;
 
-import wang.tyrael.library.statistics.individual.Logable;
+import wang.tyrael.statistics.individual.Logable;
 
 public class User implements Logable{
 	public String csmallToken;
