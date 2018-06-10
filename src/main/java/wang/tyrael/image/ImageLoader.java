@@ -28,6 +28,6 @@ public class ImageLoader {
     }
 
     public static void display(ImageView imageView, String url) {
-//        Picasso.with(context).load(url).into(imageView);
+        Picasso.get().load(url).into(imageView);
     }
 }
