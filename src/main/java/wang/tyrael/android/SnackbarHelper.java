@@ -1,7 +1,8 @@
 package wang.tyrael.android;
 
-import android.support.design.widget.Snackbar;
 import android.view.View;
+
+import com.google.android.material.snackbar.Snackbar;
 
 /**
  * Created by wangchao on 2016/9/3.

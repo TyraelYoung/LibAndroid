@@ -1,13 +1,12 @@
 package wang.tyrael.android.menu;
 
 import android.content.Context;
-
-
-import android.support.v4.view.ActionProvider;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.core.view.ActionProvider;
 
 import wang.tyrael.library.R;
 import wang.tyrael.log.LogHelper;
@@ -46,8 +45,8 @@ public class TextMenuActionProvider extends ActionProvider {
                 .inflate(R.layout.menu_provider_text, null, false);
 
 //        root.setLayoutParams(layoutParams);
-        tvProvider = (TextView) root.findViewById(R.id.tv_provider);
-        mTvBadge = (TextView) root.findViewById(R.id.tv_badge);
+        tvProvider = root.findViewById(R.id.tv_provider);
+        mTvBadge = root.findViewById(R.id.tv_badge);
 
         setCount(countRed);
         tvProvider.setText(forItem.getTitle());

@@ -1,13 +1,13 @@
 package wang.tyrael.android.activity;
 
-import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import wang.tyrael.android.ToastUtil;
 import wang.tyrael.log.LogHelper;
@@ -96,7 +96,7 @@ public abstract class LibBaseActivity extends AppCompatActivity implements UIInt
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
+                                           String[] permissions, int[] grantResults) {
 
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0

@@ -1,15 +1,15 @@
 package wang.tyrael.android.menu;
 
 import android.content.Context;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.StringRes;
-
-import android.support.v4.view.ActionProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.StringRes;
+import androidx.core.view.ActionProvider;
 
 import wang.tyrael.library.R;
 
@@ -35,16 +35,17 @@ public class BadgeActionProvider extends ActionProvider {
 
     @Override
     public View onCreateActionView() {
-        int size = context.getResources().getDimensionPixelSize(
-                android.support.design.R.dimen.abc_action_bar_default_height_material);
+        int size = 96;
+//        int size = context.getResources().getDimensionPixelSize(
+//                androidx.R.dimen.abc_action_bar_default_height_material);
 
         ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(size, size);
         View view = LayoutInflater.from(context)
                 .inflate(R.layout.menu_badge_provider, null, false);
 
         view.setLayoutParams(layoutParams);
-        mIvIcon = (ImageView) view.findViewById(R.id.iv_icon);
-        mTvBadge = (TextView) view.findViewById(R.id.tv_badge);
+        mIvIcon = view.findViewById(R.id.iv_icon);
+        mTvBadge = view.findViewById(R.id.tv_badge);
         view.setOnClickListener(onViewClickListener);
         return view;
     }
