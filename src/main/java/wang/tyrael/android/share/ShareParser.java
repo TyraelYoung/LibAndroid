@@ -3,17 +3,13 @@ package wang.tyrael.android.share;
 import android.content.Intent;
 import android.net.Uri;
 
-import androidx.annotation.NonNull;
-
 import java.util.ArrayList;
 
 public class ShareParser {
     private final Intent intent;
-    private final AbstractShareHandler shareHandler;
 
-    public ShareParser(Intent intent, @NonNull AbstractShareHandler shareHandler) {
+    public ShareParser(Intent intent) {
         this.intent = intent;
-        this.shareHandler = shareHandler;
     }
 
     public boolean checkHasShare() {
@@ -37,12 +33,15 @@ public class ShareParser {
         return false;
     }
 
+    public String getText() {
+        return intent.getStringExtra(Intent.EXTRA_TEXT);
+    }
+
     void handleSendText() {
         String sharedText = intent.getStringExtra(Intent.EXTRA_TEXT);
         if (sharedText == null) {
             return;
         }
-        shareHandler.handleSendText(sharedText);
     }
 
     void handleSendImage() {
@@ -50,7 +49,7 @@ public class ShareParser {
         if (imageUri == null) {
             return;
         }
-        shareHandler.handleSendImage(imageUri);
+
     }
 
     void handleSendMultipleImages() {
@@ -58,6 +57,5 @@ public class ShareParser {
         if (imageUris == null) {
             return;
         }
-        shareHandler.handleSendMultipleImages(imageUris);
     }
 }
