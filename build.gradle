@@ -8,7 +8,6 @@ android {
     }
 
     compileSdkVersion 27
-    buildToolsVersion '27.0.3'
 
     defaultConfig {
         minSdkVersion 18
@@ -32,20 +31,7 @@ android {
 
 dependencies {
 
-
-    api 'com.android.support:appcompat-v7:27.1.0'
-    api 'com.android.support:support-v4:27.1.0'
-    api 'com.android.support:support-vector-drawable:27.1.0'
-    api 'com.android.support.constraint:constraint-layout:1.0.2'
-    api 'com.android.support:design:27.1.0'
-
-
-//    compile 'com.madgag.spongycastle:core:latest.release'
-//    compile 'com.madgag.spongycastle:prov:latest.release'
-//    compile 'com.madgag.spongycastle:pkix:latest.release'
-//    compile 'com.madgag.spongycastle:pg:latest.release'
-
-    testCompile 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.12'
 
     //下载上传组件
 
@@ -57,13 +43,11 @@ dependencies {
 
     //bugly崩溃上报、升级组件
     api 'com.tencent.bugly:crashreport_upgrade:latest.release'//其中latest.release指代最新版本号，也可以指定明确的版本号，例如1.2.0
-    //compile 'com.tencent.bugly:nativecrashreport:latest.release' //其中latest.release指代最新版本号，也可以指定明确的版本号，例如2.2.0
 
     implementation 'com.squareup.picasso:picasso:latest.release'
     api 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.1.0'
 
     //调试okhttp
     api 'com.facebook.stetho:stetho:1.5.0'
-    compile 'com.facebook.stetho:stetho-okhttp3:1.5.0'
-
+    implementation 'com.facebook.stetho:stetho-okhttp3:1.5.0'
 }
